@@ -1,0 +1,36 @@
+.auth__main{
+  margin: 0 auto;
+  height: 100%;
+  display: grid;
+  align-items: center;
+
+  @include tablet{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15rem;
+  }
+}
+
+.auth__box-container{
+  width: 95%;
+  padding: 5rem 0rem;
+  border-radius: 30px;
+  margin: 3rem auto;
+  @include tablet{
+    padding: $p-2;
+    border: 1px solid $gray;
+    width: 100%;
+    max-width: 800px;
+    margin: 5rem 0;
+  }
+}
+
+img.auth__img{
+  display: none;
+}
+
+@include tablet{
+  img.auth__img{
+    display: block;
+    width: 500px;
+  }
+}

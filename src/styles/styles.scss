@@ -1,0 +1,18 @@
+/* Settings */
+@import './base/variables';
+@import './base/base';
+@import './base/mixins';
+
+/* Components */
+@import './components/auth';
+@import './components/form/input';
+@import './components/buttons/buttons';
+@import './components/journal';
+@import './components/notes/notes';
+@import './components/form/loading';
+
+
+/*
+  inspiration
+  https://dribbble.com/shots/15440548-Producto-Management-Dashbord/attachments/7210283?mode=media
+*/

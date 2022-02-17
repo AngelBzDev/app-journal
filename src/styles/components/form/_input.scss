@@ -1,0 +1,42 @@
+.input__container{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.input__label{
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: $gray2;
+}
+
+.input__input{
+  background: transparent;
+  font-size: 1.8rem;
+  font-weight: 600;
+  padding: 2rem;
+  border: none;
+  border-bottom: 1px solid $gray;
+  border-radius: 10px;
+  color: $white;
+  width: 100%;
+
+  &:focus{
+    outline: none;
+    background: $gray;
+  }
+}
+
+.input__name-container{
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2rem;
+  width: 100%;
+}
+
+.message{
+  margin-top: 1rem;
+}
