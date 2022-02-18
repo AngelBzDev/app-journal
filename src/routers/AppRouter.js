@@ -7,11 +7,13 @@ import LoadingScreen from "../components/forms/LoadingScreen";
 import JournalScreen from "../components/journal/JournalScreen";
 import NoteScreen from "../components/notes/NoteScreen";
 import AuthRouter from "./AuthRouter";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
   const [checking, setChecking] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const auth = getAuth();
@@ -19,7 +21,7 @@ const AppRouter = () => {
     onAuthStateChanged(auth, (user) => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
-        setIsLoggedIn(true)
+        setIsLoggedIn(true);
       }
       setTimeout(() => {
         setChecking(false);
@@ -33,9 +35,23 @@ const AppRouter = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/auth/*" index element={<AuthRouter />}></Route>
-          <Route path="/" element={<JournalScreen />}></Route>
-          <Route path="/note/:noteId" element={<NoteScreen />}></Route>
+          <Route
+            path="/auth/*"
+            element={
+              <PublicRoute isLoggedIn={isLoggedIn}>
+                <AuthRouter />
+              </PublicRoute>
+            }
+          ></Route>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <JournalScreen />
+              </PrivateRoute>
+            }
+          ></Route>
+          {/* <Route path="/note/:noteId" element={<NoteScreen />}></Route> */}
           <Route path="*" element={<Navigate to="/auth/login" />}></Route>
         </Routes>
       </BrowserRouter>
