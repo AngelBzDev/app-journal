@@ -1,12 +1,14 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
 import { login } from "../actions/auth";
+
 import LoadingScreen from "../components/forms/LoadingScreen";
-import JournalScreen from "../components/journal/JournalScreen";
-import NoteScreen from "../components/notes/NoteScreen";
 import AuthRouter from "./AuthRouter";
+import JournalRoutes from "./JournalRoutes";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
@@ -44,15 +46,15 @@ const AppRouter = () => {
             }
           ></Route>
           <Route
-            path="/"
+            path="/*"
             element={
               <PrivateRoute isLoggedIn={isLoggedIn}>
-                <JournalScreen />
+                <JournalRoutes />
               </PrivateRoute>
             }
           ></Route>
           {/* <Route path="/note/:noteId" element={<NoteScreen />}></Route> */}
-          <Route path="*" element={<Navigate to="/auth/login" />}></Route>
+          <Route path="*" element={<Navigate to="/auth/login" />} />
         </Routes>
       </BrowserRouter>
     </>
