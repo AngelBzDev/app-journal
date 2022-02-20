@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const JournalEntry = () => {
 
   return (
-    <Link to={`note/${'xd'}`} className="journal__entry" >
+    <Link to={`/note/${'xd'}`} className="journal__entry" >
       <div className="jornal__title-container">
         <h4>Title</h4>
         <div

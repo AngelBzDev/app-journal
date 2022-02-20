@@ -10,6 +10,7 @@ import {
 
 import types from "../types/types";
 import { finishLoading, startLoading } from "./ui";
+import Swal from "sweetalert2";
 
 //Iniciar con google
 export const startGoogleLogin = () => {
@@ -24,14 +25,16 @@ export const startGoogleLogin = () => {
 
 export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {
-
-    dispatch(startLoading())
+    dispatch(startLoading());
 
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password).then(({ user }) =>
-      dispatch(login(user.uid, user.displayName))
-    ).catch(err => console.log(err.code));
-    dispatch(finishLoading())
+    signInWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => dispatch(login(user.uid, user.displayName)))
+      .catch((err) => {
+        console.log(err.code);
+        Swal.fire({title: "Ay!!", text: `${err.code === 'auth/user-not-found' && 'La cuenta no existe'}`, icon: "error" })
+      });
+    dispatch(finishLoading());
   };
 };
 
@@ -51,10 +54,10 @@ export const createUser = (email, password, name) => {
 
 export const startLogout = () => {
   return async (dispatch) => {
-    await signOut(getAuth())
-    dispatch(logout())
-  }
-}
+    await signOut(getAuth());
+    dispatch(logout());
+  };
+};
 
 //Accion del reduce
 export const login = (uid, displayName) => ({
@@ -66,5 +69,5 @@ export const login = (uid, displayName) => ({
 });
 
 export const logout = () => ({
-  type: types.logout
-})
+  type: types.logout,
+});
