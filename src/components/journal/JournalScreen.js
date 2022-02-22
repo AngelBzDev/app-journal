@@ -12,7 +12,7 @@ const JournalScreen = () => {
         <ButtonRound nameClass='btn-newEntry'>
           <BsPlusLg size={'2rem'}/>
         </ButtonRound>
-        <h1>Journal</h1>
+        <h1 className='title'>Notas</h1>
         <JournalEntries />
       </main>
     </>
