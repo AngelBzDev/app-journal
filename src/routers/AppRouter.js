@@ -25,6 +25,9 @@ const AppRouter = () => {
         dispatch(login(user.uid, user.displayName));
         setIsLoggedIn(true);
       }
+      else{
+        setIsLoggedIn(false)
+      }
       setTimeout(() => {
         setChecking(false);
       }, 1500);
