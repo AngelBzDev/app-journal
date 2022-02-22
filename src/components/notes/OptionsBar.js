@@ -8,7 +8,7 @@ const OptionsBar = () => {
   return (
     <div className='container'>
       <div className='optionBar__container'>
-        <ButtonRound moreClass='mr-2'>
+        <ButtonRound moreClass='mr-2' action={'return'}>
           <BsArrowLeft size={'2rem'}/>
         </ButtonRound>
         <ButtonRound moreClass='mr-2'>
