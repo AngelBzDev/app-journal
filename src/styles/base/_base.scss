@@ -82,3 +82,38 @@ a{
 .titleAlert{
   font-size: 2rem;
 }
+
+.swal-overlay{
+  background-color: #1e192eb6
+}
+
+.swal-modal{
+  background-color: $gray;
+  border-radius: 10px;
+  color: $white;
+}
+
+.swal-title{
+  color: $white;
+  font-size: 3rem;
+}
+
+.swal-text{
+  color: $white;
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.swal-button{
+  color: $black;
+  background: $green;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 1.5rem 4rem;
+  transition: all .2s ease-in-out;
+
+  &:active{
+    transform: scale(.9);
+  }
+}

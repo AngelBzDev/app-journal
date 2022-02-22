@@ -10,7 +10,7 @@ import {
 
 import types from "../types/types";
 import { finishLoading, startLoading } from "./ui";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 
 //Iniciar con google
 export const startGoogleLogin = () => {
@@ -25,14 +25,21 @@ export const startGoogleLogin = () => {
 
 export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {
+
+    const errors = ['auth/wrong-password', 'auth/user-not-found']
+
     dispatch(startLoading());
 
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => dispatch(login(user.uid, user.displayName)))
       .catch((err) => {
-        console.log(err.code);
-        Swal.fire({title: "Ay!!", text: `${err.code === 'auth/user-not-found' && 'La cuenta no existe'}`, icon: "error" })
+        swal({
+          title: 'Ups!!',
+          // eslint-disable-next-line no-mixed-operators
+          text: `${err.code === errors[0] && 'La contraseña es incorrecta' || errors[1] && 'El correo no esta registrado'}`,
+          icon: 'error'
+        })
       });
     dispatch(finishLoading());
   };
