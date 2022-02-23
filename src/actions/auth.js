@@ -53,7 +53,7 @@ export const createUser = (email, password, name) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(async ({ user }) => {
         await updateProfile(user, { displayName: name });
-        dispatch(login(user.uid, user.displayName));
+        await dispatch(login(user.uid, user.displayName));
       })
       .catch((err) => console.log(err));
   };
