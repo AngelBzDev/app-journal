@@ -1,12 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
-const ButtonRound = ({type, children, nameClass, moreClass, action}) => {
-
-  const navigate = useNavigate()
+const ButtonRound = ({type, children, nameClass, moreClass, onClick}) => {
 
   return (
-    <button type={type} className={`btn-circle ${nameClass} ${moreClass}`} onClick={() => action === 'return' && navigate(-1)} >
+    <button type={type} className={`btn-circle ${nameClass} ${moreClass}`} onClick={onClick} >
       {children}
     </button>
   )
