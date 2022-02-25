@@ -7,7 +7,8 @@ const JournalRoutes = () => {
   return (
     <Routes>
       <Route path='/' element={<JournalScreen />}/>
-      <Route path="/note/:noteId" element={<NoteScreen /> } />
+      <Route path="/note/" element={<NoteScreen /> } />
+      <Route path="/note/" element={<NoteScreen /> } />
     </Routes>
   )
 }

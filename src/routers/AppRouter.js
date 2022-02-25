@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Navigate, Route, Routes, useParams, useResolvedPath } from "react-router-dom";
 
 import { login } from "../actions/auth";
 
@@ -11,6 +11,7 @@ import AuthRouter from "./AuthRouter";
 import JournalRoutes from "./JournalRoutes";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import { startLoadingNotes } from "../actions/notes";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -24,15 +25,16 @@ const AppRouter = () => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
         setIsLoggedIn(true);
-      }
-      else{
-        setIsLoggedIn(false)
+
+        dispatch(startLoadingNotes(user.uid));
+      } else {
+        setIsLoggedIn(false);
       }
       setTimeout(() => {
         setChecking(false);
-      }, 1500);
+      }, 1000);
     });
-  }, [dispatch, setChecking]);
+  }, [dispatch, setChecking, ]);
 
   if (checking) return <LoadingScreen />;
 

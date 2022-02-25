@@ -12,7 +12,7 @@ const OptionsBar = () => {
   return (
     <div className='container'>
       <div className='optionBar__container'>
-        <ButtonRound moreClass='mr-2' onClick={() => navigate(-1)}>
+        <ButtonRound moreClass='mr-2' onClick={() => navigate('/')}>
           <BsArrowLeft size={'2rem'}/>
         </ButtonRound>
         <ButtonRound moreClass='mr-2'>
