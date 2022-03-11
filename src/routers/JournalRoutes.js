@@ -8,7 +8,7 @@ const JournalRoutes = () => {
     <Routes>
       <Route path='/' element={<JournalScreen />}/>
       <Route path="/note/" element={<NoteScreen /> } />
-      <Route path="/note/" element={<NoteScreen /> } />
+      <Route path="/note/:noteId" element={<NoteScreen /> } />
     </Routes>
   )
 }

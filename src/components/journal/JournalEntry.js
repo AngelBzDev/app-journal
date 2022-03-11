@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const JournalEntry = ({title, body}) => {
+import moment from 'moment';
+
+const JournalEntry = ({title, body, id, date}) => {
+
+  const dateMoment = moment(date)
 
   return (
-    <Link to={`/note/${'xd'}`} className="journal__entry" >
+    <Link to={`/note/${id}`} className="journal__entry" >
       <div className="jornal__title-container">
         <h4>{title}</h4>
         <div
@@ -19,7 +23,7 @@ const JournalEntry = ({title, body}) => {
       <div className="journal__entry-body">
           <p>{body}</p>
       </div>
-      <p className="journal__entry-date">01/01/2022</p>
+      <p className="journal__entry-date">{dateMoment.format('DD/MM/YYYY')}</p>
     </Link>
   );
 };

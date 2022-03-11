@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
 const loadNotes = async (uid) => {
@@ -11,6 +11,12 @@ const loadNotes = async (uid) => {
       ...doc.data()
     })
   })
+
+  const unsub = onSnapshot(doc(db, `${uid}/journal/notes`), (doc) => {
+    console.log("Current data: ", doc.data()); 
+});
+
+  console.log(unsub)
 
   return notes
 }

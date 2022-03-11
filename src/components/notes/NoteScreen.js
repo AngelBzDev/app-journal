@@ -1,20 +1,43 @@
 import React from "react";
 import ButtonRound from "../buttons/ButtonRound";
 
-import { FaRegSave } from "react-icons/fa";
+import { FaCoins, FaRegSave } from "react-icons/fa";
 import Sidebar from "../journal/Sidebar";
 import OptionsBar from "./OptionsBar";
-/* import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startAddNewNote } from "../../actions/notes";
 import useForm from "../../hooks/useForm";
- */
+import swal from "sweetalert";
+
+//TODO Hacer el dispatch de la nota activa
 const NoteScreen = () => {
-  /* const dispatch = useDispatch(); */
-  /* const [formValues, handleInputChnage] = useForm({
+
+  const params = useParams();
+  const {noteId} = params
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const [formValues, handleInputChange] = useForm({
     title: "",
     body: "",
-  }); */
+  });
+  const { title, body } = formValues;
 
-  
+  const handleAddNote = (e) => {
+    e.preventDefault();
+    dispatch(startAddNewNote(formValues));
+    swal({
+      title: "Wow!",
+      text: "Nota creada correctamente",
+      icon: "success",
+    }).then(ok => ok && navigate('/'))
+  };
+
+  const handleUpdateNote = (e) => {
+    e.preventDefault()
+    console.log('update')
+  }
 
   return (
     <>
@@ -29,13 +52,15 @@ const NoteScreen = () => {
               autoComplete="off"
               placeholder="Titulo"
               name="title"
-              /* onChange={handleInputChnage} */
+              onChange={handleInputChange}
+              value={title}
             />
             <textarea
               className="notes__textarea"
               placeholder="Escriba aqui"
               name="body"
-              /* onChange={handleInputChnage} */
+              onChange={handleInputChange}
+              value={body}
             ></textarea>
           </div>
           <div className="notes__image">
@@ -47,7 +72,7 @@ const NoteScreen = () => {
           <ButtonRound
             type={"submit"}
             nameClass="btn-newEntry"
-            /* onClick={handleAddNote} */
+            onClick={!!noteId ? handleUpdateNote : handleAddNote}
           >
             <FaRegSave size={"2rem"} />
           </ButtonRound>

@@ -1,40 +1,41 @@
-import { addDoc, collection } from "firebase/firestore"
-import { db } from "../firebase/firebaseConfig"
-import loadNotes from "../helpers/loadNotes"
-import types from '../types/types.js'
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
+import loadNotes from "../helpers/loadNotes";
+import types from "../types/types.js";
 
-export const startAddNewNote = () => {
+export const startAddNewNote = (note) => {
   return async (dispatch, getState) => {
-    const uid = getState().auth.uid
+    const uid = getState().auth.uid;
 
     const newNote = {
-      title: '',
-      body: '',
-      date: new Date().getTime()
-    }
+      ...note,
+      date: new Date().getTime(),
+    };
 
-    const docRef = await addDoc(collection(db, `${uid}/journal/notes`), newNote)
-    dispatch(activeNote(docRef.id, newNote))
-  }
-}
+    const docRef = await addDoc(
+      collection(db, `${uid}/journal/notes`),
+      newNote
+    );
+    dispatch(activeNote(docRef.id, newNote));
+  };
+};
 
 export const activeNote = (id, note) => ({
   type: types.notesActive,
   payload: {
     id,
-    ...note
-  }
-})
+    ...note,
+  },
+});
 
 export const setNotes = (notes) => ({
   type: types.notesLoad,
-  payload: notes
-})
+  payload: notes,
+});
 
 export const startLoadingNotes = (uid) => {
   return async (dispatch) => {
-    const notes = await loadNotes(uid)
-    dispatch(setNotes(notes))
-
-  }
-}
+    const notes = await loadNotes(uid);
+    dispatch(setNotes(notes));
+  };
+};
